@@ -272,12 +272,12 @@ resource "aws_launch_template" "bastion_launch_template" {
 
   tag_specifications {
     resource_type = "instance"
-    tags          = merge(map("Name", var.bastion_launch_template_name), merge(var.tags))
+    tags          = merge(map("name", var.bastion_launch_template_name), merge(var.tags))
   }
 
   tag_specifications {
     resource_type = "volume"
-    tags          = merge(map("Name", var.bastion_launch_template_name), merge(var.tags))
+    tags          = merge(map("name", var.bastion_launch_template_name), merge(var.tags))
   }
 
   lifecycle {
@@ -310,7 +310,7 @@ resource "aws_autoscaling_group" "bastion_auto_scaling_group" {
   ]
 
   tags = concat(
-    list(map("key", "Name", "value", "ASG-${local.name_prefix}", "propagate_at_launch", true)),
+    list(map("key", "name", "value", "ASG-${local.name_prefix}", "propagate_at_launch", true)),
     local.tags_asg_format
   )
 
